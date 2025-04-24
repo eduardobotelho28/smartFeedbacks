@@ -1,7 +1,8 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<section class="bg-light" style="padding-top: 100px; min-height: 100vh;">
+
+<section class="bg-light" style="padding-top: 50px;">
   <div class="d-flex align-items-start justify-content-center">
     <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
       <h2 class="text-center mb-4" style="color: #1E90FF;">Entrar</h2>
@@ -30,4 +31,5 @@
     </div>
   </div>
 </section>
+
 <?= $this->endSection() ?>
