@@ -5,9 +5,11 @@
 <section class="bg-light" style="padding-top: 50px;">
   <div class="d-flex align-items-start justify-content-center">
     <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
-      <h2 class="text-center mb-4" style="color: #1E90FF;">Entrar</h2>
+
+      <h2 class="text-center mb-4" style="color: #1E90FF;">Bem-vindo novamente!</h2>
 
       <form id="loginForm">
+
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
           <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
@@ -27,6 +29,7 @@
             Ainda não possui sua conta? Crie agora!
           </a>
         </div>
+
       </form>
     </div>
   </div>

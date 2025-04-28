@@ -41,7 +41,7 @@
                     <?php if (session()->has('user')): ?>
                         <span class="me-2">Olá, <?= esc(session('user')['name']) ?>!</span>
                     <?php else: ?>
-                        <a href="<?= site_url("authentication/login_view") ?>" class="text-white text-decoration-none nav-link" style="background-color:#1E3A8A !important; border-radius:10px">Entrar!</a>
+                        <a href="<?= site_url("authentication/login") ?>" class="text-white text-decoration-none nav-link" style="background-color:#1E3A8A !important; border-radius:10px">Entrar!</a>
                     <?php endif; ?>
                 </li>
             </ul>

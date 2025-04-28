@@ -10,6 +10,10 @@
             height: 100%;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             display: flex;
             flex-direction: column;

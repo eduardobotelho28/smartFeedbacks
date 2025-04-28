@@ -8,4 +8,9 @@ class Authentication extends BaseController
     {
         return view('auth/login');
     }
+
+    public function register_view()
+    {
+        return view('auth/register');
+    }
 }

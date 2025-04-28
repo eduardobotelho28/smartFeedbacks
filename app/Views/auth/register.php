@@ -1,0 +1,44 @@
+<?= $this->extend('layouts/main') ?>
+
+<?= $this->section('content') ?>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4">Criar Conta</h2>
+
+        <form id="registerForm" method="post" action="<?= site_url('authentication/register') ?>">
+
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="password" name="password" required minlength="6">
+            </div>
+
+            <div class="mb-3">
+                <label for="password_confirm" class="form-label">Confirmar Senha</label>
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required minlength="6">
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="button" class="btn text-white" style="background-color: #1E90FF;" id="loginButton">Criar Conta</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<?= $this->endSection() ?>
