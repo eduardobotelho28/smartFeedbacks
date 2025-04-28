@@ -13,4 +13,8 @@ class Authentication extends BaseController
     {
         return view('auth/register');
     }
+
+    public function register () {
+        echo json_encode(array("message" => "teste", "success" => true)) ; exit;
+    }
 }

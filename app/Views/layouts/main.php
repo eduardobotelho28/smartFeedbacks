@@ -84,6 +84,12 @@
 </div>
 
 <body>
+
+    <!-- variáveis js -->
+    <script>
+        const site_url = '<?= site_url() ?>'
+    </script>
+
     <!-- HEADER -->
     <?= view('layouts/header.php') ?>
 
