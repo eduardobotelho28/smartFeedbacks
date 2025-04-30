@@ -29,11 +29,11 @@ class Authentication extends BaseController
         $data = $this->request->getPost();
 
         $validationRules = [
-            'firstname'        => 'required|alpha_space'      ,
-            'lastname'         => 'required|alpha_space'      ,
-            'email'            => 'required|valid_email'      ,
-            'password'         => 'required|min_length[6]'    ,
-            'password_confirm' => 'required|matches[password]',
+            'firstname'        => 'required|alpha_space'                             ,
+            'lastname'         => 'required|alpha_space'                             ,
+            'email'            => 'required|valid_email|is_unique[users.email]'      ,
+            'password'         => 'required|min_length[6]'                           ,
+            'password_confirm' => 'required|matches[password]'                       ,
         ];
     
         $validationMessages = [
@@ -47,7 +47,8 @@ class Authentication extends BaseController
             ],
             'email' => [
                 'required' => 'O email é obrigatório.',
-                'valid_email' => 'O email informado não é válido.'
+                'valid_email' => 'O email informado não é válido.',
+                'is_unique'   => 'O email já está em uso',
             ],
             'password' => [
                 'required' => 'A senha é obrigatória.',
@@ -86,5 +87,29 @@ class Authentication extends BaseController
                 'message' => 'Erro ao registrar usuário'
             ]);
         }
+    }
+
+    public function login () {
+
+        $data     = $this->request->getPost() ;
+        $email    = $data['email']    ?? ''   ;
+        $password = $data['password'] ?? ''   ;
+
+        $user  = $this->model->getUserByEmail($email);
+
+        if (! $user || ! password_verify($password, $user['password'])) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Email ou senha inválidos.'
+            ]);
+        }
+
+        session()->set('user', $user['id']);
+        session()->set('userName', $user['firstname']);
+
+        return $this->response->setJSON([
+            'success' => true
+        ]);
+
     }
 }

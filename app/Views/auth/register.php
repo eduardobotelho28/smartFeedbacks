@@ -43,5 +43,4 @@
 
 <script> <?= view('auth/js/register.js') ?> </script>
 
-
 <?= $this->endSection() ?>

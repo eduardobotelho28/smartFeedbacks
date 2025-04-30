@@ -12,16 +12,16 @@
 
         <div class="mb-3">
           <label for="email" class="form-label">E-mail</label>
-          <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required>
+          <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" name="email">
         </div>
 
         <div class="mb-3">
           <label for="password" class="form-label">Senha</label>
-          <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+          <input type="password" class="form-control" id="password" placeholder="Digite sua senha" name="password">
         </div>
 
         <div class="d-grid mb-3">
-          <button type="button" class="btn text-white" style="background-color: #1E90FF;" id="loginButton">Entrar</button>
+          <button type="submit" class="btn text-white" style="background-color: #1E90FF;" id="loginButton">Entrar</button>
         </div>
 
         <div class="text-center">
@@ -34,5 +34,7 @@
     </div>
   </div>
 </section>
+
+<script> <?= view('auth/js/login.js') ?> </script>
 
 <?= $this->endSection() ?>
