@@ -87,7 +87,8 @@
 
     <!-- variáveis js -->
     <script>
-        const site_url = '<?= site_url() ?>'
+        const site_url      = '<?= site_url() ?>'
+        window.toastMessage = <?= json_encode(session()->getFlashdata('toast_message')) ?>
     </script>
 
     <!-- HEADER -->
@@ -102,6 +103,7 @@
     
     <script src="<?= base_url("assets/bootstrap//bootstrap.bundle.min.js") ?>"></script>
     <script src="<?= base_url('assets/js/main.js') ?>"></script>
+
 </body>
 
 </html>

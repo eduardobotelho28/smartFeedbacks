@@ -4,7 +4,7 @@
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
-        <h2 class="text-center mb-4">Criar Conta</h2>
+        <h2 class="text-center mb-4" style="color: #1E90FF;">Criar Conta</h2>
 
         <form id="registerForm" method="post" action="<?= site_url('authentication/register') ?>">
 

@@ -70,6 +70,11 @@ class Authentication extends BaseController
             
             $this->model->register($data);
             
+            session()->setFlashdata('toast_message', [
+                'type'    => 'success', 
+                'message' => 'Usuário registrado com sucesso!'
+            ]);
+
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Usuário registrado com sucesso!'
