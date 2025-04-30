@@ -9,13 +9,13 @@
         <form id="registerForm" method="post" action="<?= site_url('authentication/register') ?>">
 
             <div class="mb-3">
-                <label for="first_name" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="first_name" name="first_name">
+                <label for="firstname" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="first_name" name="firstname">
             </div>
 
             <div class="mb-3">
-                <label for="last_name" class="form-label">Sobrenome</label>
-                <input type="text" class="form-control" id="last_name" name="last_name">
+                <label for="lastname" class="form-label">Sobrenome</label>
+                <input type="text" class="form-control" id="last_name" name="lastname">
             </div>
 
             <div class="mb-3">

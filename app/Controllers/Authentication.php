@@ -2,8 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Models\AuthenticationModel;
+
 class Authentication extends BaseController
 {
+
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new AuthenticationModel();
+    }
+
     public function login_view()
     {
         return view('auth/login');
@@ -15,24 +25,23 @@ class Authentication extends BaseController
     }
 
     public function register () {
-        // echo json_encode(array("message" => "teste", "success" => true)) ; exit;
 
         $data = $this->request->getPost();
 
         $validationRules = [
-            'first_name'       => 'required|alpha_space'      ,
-            'last_name'        => 'required|alpha_space'      ,
+            'firstname'        => 'required|alpha_space'      ,
+            'lastname'         => 'required|alpha_space'      ,
             'email'            => 'required|valid_email'      ,
             'password'         => 'required|min_length[6]'    ,
             'password_confirm' => 'required|matches[password]',
         ];
     
         $validationMessages = [
-            'first_name' => [
+            'firstname' => [
                 'required' => 'O nome é obrigatório.',
                 'alpha_space' => 'O nome deve conter apenas letras e espaços.'
             ],
-            'last_name' => [
+            'lastname' => [
                 'required' => 'O sobrenome é obrigatório.',
                 'alpha_space' => 'O sobrenome deve conter apenas letras e espaços.'
             ],
@@ -57,9 +66,20 @@ class Authentication extends BaseController
             ]);
         }
 
-        return $this->response->setJSON([
-            'success' => true,
-            'message' => 'Cadastro realizado com sucesso!'
-        ]);
+        try {
+            
+            $this->model->register($data);
+            
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Usuário registrado com sucesso!'
+            ]);
+        } catch (\Throwable $e) {
+           
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Erro ao registrar usuário'
+            ]);
+        }
     }
 }

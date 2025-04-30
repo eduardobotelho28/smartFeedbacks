@@ -11,3 +11,7 @@ function showToast(message) {
   const toast = new bootstrap.Toast(toastEl);
   toast.show();
 }
+
+function redirect (url) {
+  window.location.href = `${site_url}/${url}`
+}

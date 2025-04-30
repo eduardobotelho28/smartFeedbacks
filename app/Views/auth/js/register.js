@@ -15,12 +15,13 @@ if(form) {
 
             if(data.success == false) {
                 showToast(data.message ?? '')
+                return
             }
 
-            else {
-                window.location.href = `${site_url}/authentication/login`
+            if(data.success == true) {
+                redirect('authentication/login')
             }
-
+            
         } catch (error) {
             console.log(error)
         }
