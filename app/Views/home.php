@@ -51,12 +51,4 @@
   </div>
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(() => {
-      showToast("Este é um teste do toast Bootstrap 🚀");
-    }, 1000);
-  });
-</script>
-
 <?= $this->endSection() ?>
