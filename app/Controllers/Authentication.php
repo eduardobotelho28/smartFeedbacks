@@ -14,13 +14,11 @@ class Authentication extends BaseController
         $this->model = new AuthenticationModel();
     }
 
-    public function login_view()
-    {
+    public function login_view() {
         return view('auth/login');
     }
 
-    public function register_view()
-    {
+    public function register_view() {
         return view('auth/register');
     }
 
@@ -112,4 +110,10 @@ class Authentication extends BaseController
         ]);
 
     }
+
+    public function logout() {
+        session()->destroy(); 
+        return redirect()->to('/'); 
+    }
+
 }

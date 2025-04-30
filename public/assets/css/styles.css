@@ -59,3 +59,7 @@ a:hover, a:focus {
 a:active {
     color: #1E3A8A; 
 }
+
+header .navbar {
+    box-shadow: none;
+}

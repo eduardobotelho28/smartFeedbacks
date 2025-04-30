@@ -5,7 +5,12 @@
     }
 
     .navbar-nav {
+        padding: 10px;
         margin: 0 auto;
         align-items: center;
+    }
+
+    .navbar {
+        padding: 10px;
     }
 }
