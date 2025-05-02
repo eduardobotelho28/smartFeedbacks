@@ -25,13 +25,14 @@
 
     <!-- variáveis js -->
     <script>
-        const site_url      = '<?= site_url() ?>'
-        window.toastMessage = <?= json_encode(session()->getFlashdata('toast_message')) ?>
+      const site_url      = '<?= site_url() ?>'
+      window.toastMessage = <?= json_encode(session()->getFlashdata('toast_message')) ?>
     </script>
 
     <!-- HEADER -->
     <?= view('layouts/header.php') ?>
 
+    <!-- MAIN CONTENT -->
     <main class="pt-5" style="margin-top: 80px;">
         <?= $this->renderSection('content') ?>
     </main>
