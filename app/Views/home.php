@@ -101,7 +101,6 @@
   </div>
 </section>
 
-
 <section id="contato" class="py-5 text-center" style="background-color: #3B82F6; color: white;">
   <div class="container">
     <h2 class="mb-4">Contato</h2>
