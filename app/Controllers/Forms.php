@@ -9,4 +9,8 @@ class Forms extends BaseController
         echo 'aqui' ; exit; 
     }
 
+    public function createFormView () {
+        return view ('userForms/create');
+    }
+
 }
