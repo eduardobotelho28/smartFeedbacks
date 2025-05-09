@@ -67,4 +67,6 @@
   </div>
 </section>
 
+<script> <?= view('userForms/js/create.js') ?> </script>
+
 <?= $this->endSection() ?>
