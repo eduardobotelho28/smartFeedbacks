@@ -39,7 +39,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <?php if(session()->has('user')): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Meus Formulários</a>
+                        <a class="nav-link" href="<?= site_url('/forms') ?>">Meus Formulários</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Meus Feedbacks</a>

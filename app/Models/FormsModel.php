@@ -10,7 +10,8 @@ class FormsModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'user', 'name', 'question_1', 'question_2', 'question_3',
-        'add_nps', 'add_csat', 'hash', 'public_link', 'created_at'
+        'add_nps', 'add_csat', 'hash', 'public_link', 'created_at',
+        'qr_code_path'
     ];
 
 }

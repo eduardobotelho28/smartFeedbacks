@@ -124,3 +124,6 @@ nb-configuration.xml
 
 /results/
 /phpunit*.xml
+
+public/qrcodes/*
+!public/qrcodes/index.html
