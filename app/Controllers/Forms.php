@@ -18,7 +18,9 @@ class Forms extends BaseController
     }
 
     public function userForms () {
-        return view ('userForms/forms');
+        $user = session()->get('user');
+        $data['forms'] = $this->model->where('user', $user)->findAll();
+        return view ('userForms/forms', $data);
     }
 
     public function createFormView () {
