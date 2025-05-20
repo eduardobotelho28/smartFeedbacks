@@ -26,9 +26,9 @@
                             <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#modalUrl<?= $form['id'] ?>">URL</button>
                             <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#modalQr<?= $form['id'] ?>">Mostrar QR Code</button>
 
-                            <a href="<?= site_url('forms/delete/' . $form['id']) ?>"
+                            <a href="<?= site_url('forms/delete/' . $form['hash']) ?>"
                                 class="btn btn-danger btn-sm"
-                                onclick="return confirm('Tem certeza que deseja excluir este formulário?')">Excluir
+                                >Excluir
                             </a>
                         </div>
                     </div>

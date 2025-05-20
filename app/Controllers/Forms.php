@@ -83,6 +83,26 @@ class Forms extends BaseController
 
     }
 
+    public function delete ($form_hash) {
+        
+        $form = $this->model->where('hash', $form_hash)
+                            ->where('user', session()->get('user'))
+                            ->first();
+    
+        if(!$form) 
+            return redirect()->to('forms');
+
+        $this->model->delete($form['id']);
+
+        session()->setFlashdata('toast_message', [
+                'type'    => 'success', 
+                'message' => 'Formulário excluído!'
+            ]);
+
+        return redirect()->to('forms');
+
+    }
+
     private function generateQrCodeAndUpload ($url) {
 
         $options = new QROptions([

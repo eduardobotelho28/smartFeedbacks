@@ -18,7 +18,7 @@ if(form) {
             }
 
             if(data.success == true) {
-                redirect('')
+                redirect('forms')
             }
             
         } catch (error) {
