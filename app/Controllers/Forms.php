@@ -62,7 +62,7 @@ class Forms extends BaseController
         $normalize = fn($val) => trim($val) === '' ? null : $val;
         $formData = [
             'user'         => $user                                  ,
-            'name'         => $data['name']                          ,
+            'name'         => htmlspecialchars($data['name'])        ,
             'question_1'   => $normalize($data['question_1'] ?? null),
             'question_2'   => $normalize($data['question_2'] ?? null),
             'question_3'   => $normalize($data['question_3'] ?? null),
@@ -101,6 +101,19 @@ class Forms extends BaseController
 
         return redirect()->to('forms');
 
+    }
+
+    public function reply_view ($hash) {
+    
+        $form = $this->model->where('hash', $hash)->first();
+
+        if (!$form) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Formulário não encontrado.");
+        }
+
+        echo '<pre>' ; print_r($form);
+
+        // return view('forms/reply', ['form' => $form]);
     }
 
     private function generateQrCodeAndUpload ($url) {
