@@ -111,9 +111,7 @@ class Forms extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Formulário não encontrado.");
         }
 
-        echo '<pre>' ; print_r($form);
-
-        // return view('forms/reply', ['form' => $form]);
+        return view('publicForms/reply', ['form' => $form]);
     }
 
     private function generateQrCodeAndUpload ($url) {

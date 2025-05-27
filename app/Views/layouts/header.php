@@ -1,10 +1,11 @@
 <?php
-    //pega o controller atual. 
-    //serve para controlar os links do header. ex: 'como funciona' e 'contato' só devem aparecer quando estivermos na HOME.      
+    // Pega o controller e método atuais.
     $router = service('router');
     $currentController = $router->controllerName();
+    $currentMethod = $router->methodName();
 ?>
 
+<?php if ($currentMethod !== 'reply_view'): ?>
 <header class="fixed-top shadow">
     <nav class="navbar navbar-expand-lg navbar-dark container">
 
@@ -36,8 +37,8 @@
             </ul>
 
             <!-- Links de usuário -->
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <?php if(session()->has('user')): ?>
+            <?php if(session()->has('user')): ?>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="<?= site_url('/forms') ?>">Meus Formulários</a>
                     </li>
@@ -56,16 +57,18 @@
                             <li><a class="dropdown-item" href="<?= site_url('authentication/logout') ?>">Sair</a></li>
                         </ul>
                     </li>
-
-                <?php else: ?>
+                </ul>
+            <?php else: ?>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a href="<?= site_url('authentication/login') ?>" class="text-white text-decoration-none nav-link">
                             <strong>Entrar</strong>
                         </a>
                     </li>
-                <?php endif; ?>
-            </ul>
+                </ul>
+            <?php endif; ?>
 
         </div>
     </nav>
 </header>
+<?php endif; ?>
