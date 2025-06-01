@@ -11,10 +11,12 @@ class Forms extends BaseController
 {
 
     protected $model;
+    protected $replyModel;
 
     public function __construct()
     {
         $this->model = new FormsModel();
+        $this->replyModel = new \App\Models\ReplyModel();
     }
 
     public function userForms () {
@@ -113,6 +115,58 @@ class Forms extends BaseController
 
         return view('publicForms/reply', ['form' => $form]);
     }
+
+    public function reply($formHash) {
+
+        $data = $this->request->getPost();
+
+        // Verifica se o formulário foi enviado com campos obrigatórios
+        $camposObrigatorios = [];
+
+        foreach ($data as $key => $value) {
+            $value = trim($value);
+            
+            // Ignora campos opcionais
+            if ($key === 'name') {
+                continue;
+            }
+
+            // Se o campo estiver presente e estiver vazio, adiciona ao array de erros
+            if ($value === '') {
+                $camposObrigatorios[] = $key;
+            }
+        }
+
+        if (!empty($camposObrigatorios)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Preencha todos os campos obrigatórios antes de enviar o formulário.'
+            ]);
+        }
+
+        // Normaliza as respostas
+        $normalize = fn($val) => trim($val) === '' ? null : htmlspecialchars($val);
+
+        $replyData = [
+            'form'        => $formHash,
+            'question_1'  => $normalize($data['question_1'] ?? null),
+            'question_2'  => $normalize($data['question_2'] ?? null),
+            'question_3'  => $normalize($data['question_3'] ?? null),
+            'nps'         => $normalize($data['nps'] ?? null),
+            'csat'        => $normalize($data['csat'] ?? null),
+            'client_name' => $normalize($data['name'] ?? null),
+            'hash'        => bin2hex(random_bytes(8)), 
+            'created_at'  => date('Y-m-d H:i:s'),
+        ];
+
+        $this->replyModel->insert($replyData); 
+
+        return $this->response->setJSON([
+            'success' => true,
+            'message' => 'Feedback enviado com sucesso!'
+        ]);
+    }
+
 
     private function generateQrCodeAndUpload ($url) {
 

@@ -75,12 +75,12 @@
     <div class="form-container">
         <h2 class="form-title"><?= esc($form['name']) ?></h2>
 
-        <form id="replyForm">
+        <form id="replyForm" data-hash="<?= $form['hash']?>">
 
             <!-- Nome opcional -->
             <div class="mb-2">
-                <label for="user_name" class="form-label">Seu nome (opcional):</label>
-                <input type="text" name="user_name" id="user_name" class="form-control form-control-sm">
+                <label for="name" class="form-label">Seu nome (opcional):</label>
+                <input type="text" name="name" id="name" class="form-control form-control-sm">
             </div>
 
             <!-- NPS -->
@@ -129,5 +129,7 @@
         </form>
     </div>
 </div>
+
+<script> <?= view('publicForms/js/form.js') ?> </script>
 
 <?= $this->endSection() ?>
