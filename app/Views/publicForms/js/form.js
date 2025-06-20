@@ -1,5 +1,6 @@
 const form = document.querySelector('#replyForm');
 const hash = form?.dataset?.hash;
+const button = document.querySelector('#submit-form')
 
 if (form) {
     form.addEventListener('submit', async (e) => {
@@ -23,6 +24,8 @@ if (form) {
         }
 
         const formData = new FormData(form);
+
+        button.setAttribute('disabled', true)
 
         try {
             const data = await postReplyForm(formData);

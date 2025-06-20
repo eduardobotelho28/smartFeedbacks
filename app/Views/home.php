@@ -101,13 +101,19 @@
   </div>
 </section>
 
-<section id="contato" class="py-5 text-center" style="background-color: #3B82F6; color: white;">
+<section id="contato" class="py-5">
   <div class="container">
-    <h2 class="mb-4">Contato</h2>
-    <p class="lead">Entre em contato conosco para dúvidas, sugestões ou suporte.</p>
-    <p>Email: contato@sistemadefeedbacks.com.br</p>
-    <p>Telefone: (11) 99999-9999</p>
+    <div class="p-4 p-md-5 shadow-sm border rounded" style="border:2px solid #3B82F6 !important;">
+      <h2 class="mb-3 text-center" style="color: #007BFF;">Contato</h2>
+      <p class="lead text-center mb-4">Entre em contato conosco para dúvidas, sugestões ou suporte.</p>
+
+      <div class="text-center" style="font-size: 1.1rem;">
+        <p><strong>Email:</strong> contato@sistemadefeedbacks.com.br</p>
+        <p><strong>Telefone:</strong> (11) 99999-9999</p>
+      </div>
+    </div>
   </div>
 </section>
+
 
 <?= $this->endSection() ?>

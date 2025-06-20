@@ -94,6 +94,14 @@ class Forms extends BaseController
         if(!$form) 
             return redirect()->to('forms');
 
+        if (!empty($form['qr_code_path'])) {
+            $qrFullPath = FCPATH . $form['qr_code_path'];
+
+            if (file_exists($qrFullPath)) {
+                unlink($qrFullPath);
+            }
+        }
+
         $this->model->delete($form['id']);
 
         session()->setFlashdata('toast_message', [
@@ -166,7 +174,6 @@ class Forms extends BaseController
             'message' => 'Feedback enviado com sucesso!'
         ]);
     }
-
 
     private function generateQrCodeAndUpload ($url) {
 

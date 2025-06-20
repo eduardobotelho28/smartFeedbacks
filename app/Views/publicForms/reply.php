@@ -123,7 +123,7 @@
             <?php endfor; ?>
 
             <div class="d-grid mt-3">
-                <button type="submit" class="btn btn-primary btn-sm">Enviar Resposta</button>
+                <button type="submit" class="btn btn-primary btn-sm" id="submit-form">Enviar Resposta</button>
             </div>
 
         </form>
