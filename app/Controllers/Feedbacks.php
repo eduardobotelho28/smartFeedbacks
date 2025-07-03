@@ -131,5 +131,17 @@ class Feedbacks extends BaseController
         ]);
     }
 
+    public function delete($hash)
+    {
+        $reply = $this->replyModel->where('hash', $hash)->first();
+
+        if (! $reply) {
+            return redirect()->to('/feedbacks')->with('error', 'Resposta não encontrada.');
+        }
+
+        $this->replyModel->where('hash', $hash)->delete();
+
+        return redirect()->to('/feedbacks')->with('success', 'Resposta excluída com sucesso!');
+    }
 
 }
