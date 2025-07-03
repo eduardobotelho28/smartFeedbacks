@@ -43,7 +43,7 @@
                         <a class="nav-link" href="<?= site_url('/forms') ?>">Meus Formulários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Meus Feedbacks</a>
+                        <a class="nav-link" href="<?= site_url('/feedbacks')?>">Meus Feedbacks</a>
                     </li>
 
                     <!-- Dropdown de usuário -->

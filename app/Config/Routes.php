@@ -19,3 +19,5 @@ $routes->post('forms/create', 'Forms::create', ['filter' => 'auth']);
 $routes->get('forms/delete/(:segment)', 'Forms::delete/$1', ['filter' => 'auth']);
 $routes->get('forms/reply/(:segment)',  'Forms::reply_view/$1');
 $routes->post('forms/reply/(:segment)', 'Forms::reply/$1');
+
+$routes->get('feedbacks', 'Feedbacks::myFeedbacks', ['filter' => 'auth']);
