@@ -21,3 +21,4 @@ $routes->get('forms/reply/(:segment)',  'Forms::reply_view/$1');
 $routes->post('forms/reply/(:segment)', 'Forms::reply/$1');
 
 $routes->get('feedbacks', 'Feedbacks::myFeedbacks', ['filter' => 'auth']);
+$routes->get('/feedbacks/view/(:hash)', 'Feedbacks::view/$1', ['filter' => 'auth']);

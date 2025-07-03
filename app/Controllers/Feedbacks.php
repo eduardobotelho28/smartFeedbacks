@@ -106,4 +106,30 @@ class Feedbacks extends BaseController
         return view('feedbacks/all', $data);
     }
 
+    public function view($hash)
+    {
+        
+        $reply = $this->replyModel
+            ->where('hash', $hash)
+            ->first();
+
+        if (! $reply) {
+            return redirect()->to('/feedbacks')->with('error', 'Resposta não encontrada.');
+        }
+
+        $form = $this->formModel
+            ->where('hash', $reply['form'])
+            ->first();
+
+        if (! $form) {
+            return redirect()->to('/feedbacks')->with('error', 'Formulário relacionado não encontrado.');
+        }
+
+        return view('feedbacks/reply', [
+            'reply' => $reply,
+            'form'  => $form,
+        ]);
+    }
+
+
 }
