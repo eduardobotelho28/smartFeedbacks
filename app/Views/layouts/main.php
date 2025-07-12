@@ -3,7 +3,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title><?= esc($title ?? 'Minha Aplicação') ?></title>
+    <title><?= esc($title ?? 'SmartFeedbacks') ?></title>
     <link rel="stylesheet" href="<?= base_url("assets/bootstrap/bootstrap.min.css") ?>">
     <link rel="stylesheet" href="<?= base_url("assets/css/styles.css") ?>">
     <link rel="stylesheet" href="<?= base_url("assets/css/mediaQueries.css") ?>">

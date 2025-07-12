@@ -108,7 +108,7 @@
       <p class="lead text-center mb-4">Entre em contato conosco para dúvidas, sugestões ou suporte.</p>
 
       <div class="text-center" style="font-size: 1.1rem;">
-        <p><strong>Email:</strong> contato@sistemadefeedbacks.com.br</p>
+        <p><strong>Email:</strong> contato@smartfeedbacks.com.br</p>
         <p><strong>Telefone:</strong> (11) 99999-9999</p>
       </div>
     </div>

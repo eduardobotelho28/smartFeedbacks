@@ -10,7 +10,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark container">
 
         <!-- Logo -->
-        <a class="navbar-brand fw-bold" href="#">Sistema de Feedbacks</a>
+        <a class="navbar-brand fw-bold" href="#">SmartFeedbacks</a>
 
         <!-- Botão de menu hamburguer para telas pequenas -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
