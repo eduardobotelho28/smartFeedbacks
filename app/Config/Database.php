@@ -19,37 +19,37 @@ class Database extends Config
      */
     public string $defaultGroup = 'default';
 
-    /**
-     * The default database connection.
-     *
-     * @var array<string, mixed>
-     */
-    public array $default = [
-        'DSN'          => '',
-        'hostname'     => 'localhost',
-        'username'     => 'feedbacks_admin',
-        'password'     => 'tSmtMOV0UpirtH99',
-        'database'     => 'sistema-feedbacks',
-        'DBDriver'     => 'MySQLi',
-        'DBPrefix'     => '',
-        'pConnect'     => false,
-        'DBDebug'      => true,
-        'charset'      => 'utf8mb4',
-        'DBCollat'     => 'utf8mb4_general_ci',
-        'swapPre'      => '',
-        'encrypt'      => false,
-        'compress'     => false,
-        'strictOn'     => false,
-        'failover'     => [],
-        'port'         => 3306,
-        'numberNative' => false,
-        'foundRows'    => false,
-        'dateFormat'   => [
-            'date'     => 'Y-m-d',
-            'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
-    ];
+    // /**
+    //  * The default database connection.
+    //  *
+    //  * @var array<string, mixed>
+    //  */
+    // public array $default = [
+    //     'DSN'          => '',
+    //     'hostname'     => 'localhost',
+    //     'username'     => 'feedbacks_admin',
+    //     'password'     => 'tSmtMOV0UpirtH99',
+    //     'database'     => 'sistema-feedbacks',
+    //     'DBDriver'     => 'MySQLi',
+    //     'DBPrefix'     => '',
+    //     'pConnect'     => false,
+    //     'DBDebug'      => true,
+    //     'charset'      => 'utf8mb4',
+    //     'DBCollat'     => 'utf8mb4_general_ci',
+    //     'swapPre'      => '',
+    //     'encrypt'      => false,
+    //     'compress'     => false,
+    //     'strictOn'     => false,
+    //     'failover'     => [],
+    //     'port'         => 3306,
+    //     'numberNative' => false,
+    //     'foundRows'    => false,
+    //     'dateFormat'   => [
+    //         'date'     => 'Y-m-d',
+    //         'datetime' => 'Y-m-d H:i:s',
+    //         'time'     => 'H:i:s',
+    //     ],
+    // ];
 
     //    /**
     //     * Sample database connection for SQLite3.
@@ -192,6 +192,48 @@ class Database extends Config
     public function __construct()
     {
         parent::__construct();
+
+        if (ENVIRONMENT === 'production') {
+            $this->default = [
+                'DSN'      => '',
+                'hostname' => env('database.prod.hostname'),
+                'username' => env('database.prod.username'),
+                'password' => env('database.prod.password'),
+                'database' => env('database.prod.database'),
+                'DBDriver' => env('database.prod.DBDriver'),
+                'DBPrefix' => env('database.prod.DBPrefix'),
+                'pConnect' => false,
+                'DBDebug'  => false,
+                'charset'  => 'utf8mb4',
+                'DBCollat' => 'utf8mb4_general_ci',
+                'swapPre'  => '',
+                'encrypt'  => false,
+                'compress' => false,
+                'strictOn' => false,
+                'failover' => [],
+                'port'     => env('database.prod.port'),
+            ];
+        } else {
+            $this->default = [
+                'DSN'      => '',
+                'hostname' => env('database.default.hostname'),
+                'username' => env('database.default.username'),
+                'password' => env('database.default.password'),
+                'database' => env('database.default.database'),
+                'DBDriver' => env('database.default.DBDriver'),
+                'DBPrefix' => env('database.default.DBPrefix'),
+                'pConnect' => false,
+                'DBDebug'  => true,
+                'charset'  => 'utf8mb4',
+                'DBCollat' => 'utf8mb4_general_ci',
+                'swapPre'  => '',
+                'encrypt'  => false,
+                'compress' => false,
+                'strictOn' => false,
+                'failover' => [],
+                'port'     => env('database.default.port'),
+            ];
+        }
 
         // Ensure that we always set the database group to 'tests' if
         // we are currently running an automated test suite, so that
