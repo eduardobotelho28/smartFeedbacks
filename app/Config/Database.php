@@ -211,7 +211,7 @@ class Database extends Config
                 'compress' => false,
                 'strictOn' => false,
                 'failover' => [],
-                'port'     => env('database.prod.port'),
+                'port'     => (int) env('database.prod.port'),
             ];
         } else {
             $this->default = [
@@ -231,7 +231,7 @@ class Database extends Config
                 'compress' => false,
                 'strictOn' => false,
                 'failover' => [],
-                'port'     => env('database.default.port'),
+                'port'     => (int) env('database.default.port'),
             ];
         }
 
