@@ -189,7 +189,10 @@ class Forms extends BaseController
        
         $arquivo_imagem = base64_decode($img);
 
-        $directory = ROOTPATH . 'public/qrcodes/';
+        // $directory = ROOTPATH . 'public/qrcodes/';
+
+        $directory = FCPATH . 'qrcodes/';
+
         $fileName  = uniqid() . '.png';
 
         $relativePath = 'qrcodes/' . $fileName; 

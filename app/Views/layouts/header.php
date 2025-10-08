@@ -52,7 +52,7 @@
                             Olá, <?= esc(session()->get('userName')) ?>!
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="<?= site_url('usuario/perfil') ?>">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="<?= site_url('user/profile') ?>">Meu Perfil</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?= site_url('authentication/logout') ?>">Sair</a></li>
                         </ul>
