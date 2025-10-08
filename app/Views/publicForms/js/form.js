@@ -35,11 +35,15 @@ if (form) {
                 return;
             }
 
-            showToast('Obrigado pelo feedback!', 'success');
+            // Redireciona para página de agradecimento
+            window.location.href = `${site_url}forms/thank-you`;
 
         } catch (error) {
             console.error('Erro no envio:', error);
             showToast('Ocorreu um erro no envio.');
+        }
+        finally {
+            button.removeAttribute('disabled')
         }
     });
 }

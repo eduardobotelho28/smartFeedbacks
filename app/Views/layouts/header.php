@@ -5,7 +5,10 @@
     $currentMethod = $router->methodName();
 ?>
 
-<?php if ($currentMethod !== 'reply_view'): ?>
+
+<!-- ROTAS QUE NÃO POSSUEM HEADER -->
+<?php if ($currentMethod !== 'reply_view' && $currentMethod !== 'thankYou' ): ?>
+
 <header class="fixed-top shadow">
     <nav class="navbar navbar-expand-lg navbar-dark container">
 

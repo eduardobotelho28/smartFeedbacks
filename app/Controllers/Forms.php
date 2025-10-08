@@ -207,4 +207,8 @@ class Forms extends BaseController
 
     }
 
+    public function thankYou () {
+        return view('publicForms/thankYou');
+    }
+
 }

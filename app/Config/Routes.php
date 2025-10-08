@@ -27,3 +27,4 @@ $routes->get('feedbacks/delete/(:segment)', 'Feedbacks::delete/$1', ['filter' =>
 $routes->get('user/profile', 'User::profile', ['filter' => 'auth']);
 $routes->post('user/updateProfile', 'User::updateProfile', ['filter' => 'auth']);
 
+$routes->get('forms/thank-you', 'Forms::thankYou');
