@@ -31,6 +31,8 @@ class Forms extends BaseController
 
     public function create () {
 
+        echo '<pre>' ; print_r($this->request->getPost()); exit; 
+
         $data     = $this->request->getPost();
         $add_nps  = $this->request->getPost('add_nps')  ? 1 : 0;
         $add_csat = $this->request->getPost('add_csat') ? 1 : 0;
