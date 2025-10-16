@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (metricKey === 'nps' || metricKey === 'cli') {
                 modalBody = '<div class="d-flex justify-content-center gap-2 mt-2">';
-                for (let i = 0; i <= 10; i++) {
+                for (let i = 1; i <= 10; i++) {
                     modalBody += `
                         <div class="preview-number" style="
                             padding: 0.5rem 0.7rem; 

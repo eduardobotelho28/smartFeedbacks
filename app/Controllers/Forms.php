@@ -10,10 +10,10 @@ use chillerlan\QRCode\QROptions;
 class Forms extends BaseController
 {
 
-    protected $model          ;
-    protected $replyModel     ;
-    protected $questionsModel ;
-    protected $db             ;
+    protected $model;
+    protected $replyModel;
+    protected $questionsModel;
+    protected $db;
 
     public function __construct()
     {
@@ -209,8 +209,13 @@ class Forms extends BaseController
 
     public function reply_view($hash)
     {
+    
+        $builder = $this->db->table('forms');
+        $builder->select('forms.*, form_questions.*')
+                ->join('form_questions', 'form_questions.form = forms.hash', 'left')
+                ->where('forms.hash', $hash);
 
-        $form = $this->model->where('hash', $hash)->first();
+        $form = $builder->get()->getRowArray();
 
         if (!$form) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Formulário não encontrado.");
@@ -218,6 +223,7 @@ class Forms extends BaseController
 
         return view('publicForms/reply', ['form' => $form]);
     }
+
 
     public function reply($formHash)
     {

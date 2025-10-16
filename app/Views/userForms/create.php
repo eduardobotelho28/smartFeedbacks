@@ -25,9 +25,9 @@
         <div class="metric-panel d-grid gap-3 mb-5">
           <?php
             $metrics = [
-              'nps'  => ['label' => 'NPS (Net Promoter Score)', 'preview' => 'De 0 a 10, qual a chance de você recomendar a nossa empresa a um amigo?'],
+              'nps'  => ['label' => 'NPS (Net Promoter Score)', 'preview' => 'De 1 a 10, qual a chance de você recomendar a nossa empresa a um amigo?'],
               'csat' => ['label' => 'CSAT (Customer Satisfaction Score)', 'preview' => 'Como você avaliaria sua experiência ao utilizar nosso serviço? (Emojis)'],
-              'cli'  => ['label' => 'CLI (Customer Loyalty Index)', 'preview' => 'De 0 a 10, qual a chance de você voltar a usar nossos serviços/produtos?'],
+              'cli'  => ['label' => 'CLI (Customer Loyalty Index)', 'preview' => 'De 1 a 10, qual a chance de você voltar a usar nossos serviços/produtos?'],
               'ces'  => ['label' => 'CES (Customer Effort Score)', 'preview' => 'De 1 a 7, o quão fácil foi comprar conosco?'],
               'exit_survey' => ['label' => 'Exit Survey', 'preview' => 'Por favor, nos diga o principal motivo de sua saída ou insatisfação.'],
               'stars' => ['label' => 'Estrelas/Avalição Simples', 'preview' => 'Como você classificaria nosso serviço de 1 a 5 estrelas?']

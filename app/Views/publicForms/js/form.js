@@ -6,22 +6,22 @@ if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Validação de NPS e CSAT se estiverem presentes
-        const requiresNps = form.querySelector('[name="nps"]') !== null;
-        const requiresCsat = form.querySelector('[name="csat"]') !== null;
+        
+        // const requiresNps = form.querySelector('[name="nps"]') !== null;
+        // const requiresCsat = form.querySelector('[name="csat"]') !== null;
 
-        const npsChecked = form.querySelector('input[name="nps"]:checked');
-        const csatChecked = form.querySelector('input[name="csat"]:checked');
+        // const npsChecked = form.querySelector('input[name="nps"]:checked');
+        // const csatChecked = form.querySelector('input[name="csat"]:checked');
 
-        if (requiresNps && !npsChecked) {
-            showToast('Selecione uma nota NPS.');
-            return;
-        }
+        // if (requiresNps && !npsChecked) {
+        //     showToast('Selecione uma nota NPS.');
+        //     return;
+        // }
 
-        if (requiresCsat && !csatChecked) {
-            showToast('Selecione uma avaliação de satisfação (CSAT).');
-            return;
-        }
+        // if (requiresCsat && !csatChecked) {
+        //     showToast('Selecione uma avaliação de satisfação (CSAT).');
+        //     return;
+        // }
 
         const formData = new FormData(form);
 
