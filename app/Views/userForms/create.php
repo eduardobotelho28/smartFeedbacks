@@ -20,7 +20,6 @@
 
         <!-- Principais Métricas -->
         <h5 class="mb-2" style="color: #1E3A8A;">Principais Métricas do mercado, personalize como quiser.</h5>
-        <p class="mb-2" style="color: #1E3A8A;">Adicione ao menos uma.</p>
         <p class="text-muted mb-3" style="font-size: 0.9rem;">Clique em "Ver prévia" para ver a pergunta da métrica</p>
 
         <div class="metric-panel d-grid gap-3 mb-5">
@@ -76,53 +75,53 @@
 </section>
 
 <style>
-/* Painel de métricas */
-.metric-card {
-  position: relative !important;
-  background-color: #f9fafb !important;
-  border: 2px solid #e5e7eb !important;
-  border-radius: 12px !important;
-  padding: 15px 20px !important;
-  cursor: pointer !important;
-  transition: all 0.25s ease !important;
-}
+  /* Painel de métricas */
+  .metric-card {
+    position: relative !important;
+    background-color: #f9fafb !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 12px !important;
+    padding: 15px 20px !important;
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
+  }
 
-.metric-toggle {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  cursor: pointer !important;
-  font-weight: 500 !important;
-}
+  .metric-toggle {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    font-weight: 500 !important;
+  }
 
-.metric-toggle .toggle-indicator {
-  width: 40px !important;
-  height: 20px !important;
-  background-color: #e5e7eb !important;
-  border-radius: 10px !important;
-  position: relative !important;
-  transition: 0.25s !important;
-}
+  .metric-toggle .toggle-indicator {
+    width: 40px !important;
+    height: 20px !important;
+    background-color: #e5e7eb !important;
+    border-radius: 10px !important;
+    position: relative !important;
+    transition: 0.25s !important;
+  }
 
-.metric-toggle .toggle-indicator::after {
-  content: "" !important;
-  width: 18px !important;
-  height: 18px !important;
-  background-color: white !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  top: 1px !important;
-  left: 1px !important;
-  transition: 0.25s !important;
-}
+  .metric-toggle .toggle-indicator::after {
+    content: "" !important;
+    width: 18px !important;
+    height: 18px !important;
+    background-color: white !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: 1px !important;
+    left: 1px !important;
+    transition: 0.25s !important;
+  }
 
-input[type="checkbox"]:checked + .metric-toggle .toggle-indicator {
-  background-color: #3B82F6 !important;
-}
+  input[type="checkbox"]:checked + .metric-toggle .toggle-indicator {
+    background-color: #3B82F6 !important;
+  }
 
-input[type="checkbox"]:checked + .metric-toggle .toggle-indicator::after {
-  transform: translateX(20px) !important;
-}
+  input[type="checkbox"]:checked + .metric-toggle .toggle-indicator::after {
+    transform: translateX(20px) !important;
+  }
 </style>
 
 <script> <?= view('userForms/js/create.js') ?> </script>
