@@ -29,14 +29,14 @@
         font-weight: 500;
         color: #343a40;
         margin-bottom: 0.4rem;
-        margin-top: 2rem; /* aumentado o espaçamento entre perguntas */
+        margin-top: 2rem;
     }
     .rating-scale {
         display: flex;
         justify-content: center;
         gap: 0.4rem;
         flex-wrap: wrap;
-        margin-bottom: 1.5rem; /* aumentado */
+        margin-bottom: 1.5rem;
     }
     .rating-scale input[type="radio"] {
         display: none;
@@ -74,22 +74,37 @@
     .star-scale {
         display: flex;
         justify-content: center;
-        gap: 0.4rem;
+        gap: 0.2rem;
         margin-bottom: 1.5rem;
+        align-items: center;
+    }
+    .star-scale div {
+        margin: 0;
+        padding: 0;
     }
     .star-scale input[type="radio"] {
-        display: none;
+        display: none !important;
     }
-    .star-scale label {
-        font-size: 1.6rem;
-        color: #ccc;
+    .star-scale .star-label {
+        font-size: 1.8rem;
+        color: #d3d3d3;
         cursor: pointer;
-        transition: color 0.2s ease;
+        transition: color 0.15s ease-in-out;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: none !important;
+        line-height: 1;
+        display: inline-block;
+        min-width: unset !important;
+        width: auto;
+        text-align: left;
     }
-    .star-scale input[type="radio"]:checked ~ label,
-    .star-scale label:hover,
-    .star-scale label:hover ~ label {
-        color: #007BFF;
+    .star-scale .star-label:hover {
+        color: #FFD700 !important;
+    }
+    .star-scale .star-label.active {
+        color: #FFD700 !important;
     }
 </style>
 
@@ -163,10 +178,12 @@
             <!-- SIMPLE STAR -->
             <?php if ($form['add_simple_star']): ?>
                 <div class="section-title text-center">Como você avaliaria nossa experiência geral?</div>
-                <div class="star-scale emoji-scale">
-                    <?php for ($i = 5; $i >= 1; $i--): ?>
-                        <input type="radio" id="star<?= $i ?>" name="simple_star" value="<?= $i ?>">
-                        <label for="star<?= $i ?>">⭐</label>
+                <div class="star-scale">
+                    <?php for ($i = 1; $i <= 5; $i++): ?>
+                        <div>
+                            <input type="radio" id="star<?= $i ?>" name="simple_star" value="<?= $i ?>" class="star-input">
+                            <label for="star<?= $i ?>" class="star-label" data-value="<?= $i ?>">★</label>
+                        </div>
                     <?php endfor; ?>
                 </div>
             <?php endif; ?>
@@ -197,6 +214,8 @@
     </div>
 </div>
 
-<script> <?= view('publicForms/js/form.js') ?> </script>
+<script>
+    <?= view('publicForms/js/form.js') ?>
+</script>
 
 <?= $this->endSection() ?>

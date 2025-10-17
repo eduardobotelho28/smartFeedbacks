@@ -56,3 +56,30 @@ async function postReplyForm(formData) {
 
     return await res.json();
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const stars = document.querySelectorAll('.star-label');
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function(e) {
+            e.preventDefault();
+            const value = this.getAttribute('data-value');
+            
+            const input = document.getElementById('star' + value);
+            if (input) {
+                input.checked = true;
+            }
+            
+            stars.forEach(s => {
+                const sValue = parseInt(s.getAttribute('data-value'));
+                const clickedValue = parseInt(value);
+                
+                if (sValue <= clickedValue) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+        });
+    });
+});
