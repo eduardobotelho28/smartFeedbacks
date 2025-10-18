@@ -37,6 +37,10 @@
                         <a class="nav-link" href="#contato">Contato</a>
                     </li>
                 <?php endif; ?>
+
+                <li class="nav-item" style="display: inline-block;">
+                    <a class="nav-link" href="<?= site_url('/metricsGuide') ?>" style="display:inline-block">Guia de Métricas</a>
+                </li>
             </ul>
 
             <!-- Links de usuário -->

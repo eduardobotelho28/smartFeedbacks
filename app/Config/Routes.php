@@ -28,3 +28,5 @@ $routes->get('user/profile', 'User::profile', ['filter' => 'auth']);
 $routes->post('user/updateProfile', 'User::updateProfile', ['filter' => 'auth']);
 
 $routes->get('forms/thank-you', 'Forms::thankYou');
+
+$routes->get('metricsGuide', 'MetricsGuide::guideView');
