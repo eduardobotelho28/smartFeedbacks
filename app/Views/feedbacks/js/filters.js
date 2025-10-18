@@ -23,6 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!valor) return true;
             const mes = card.dataset.mes.toString().trim();
             return mes === valor.toString().trim();
+        },
+        formName : (card,valor) => {
+            if(!valor) return true
+
+            const formHash = card.dataset.formhash.toString().trim()
+
+            if(formHash == valor) return true; 
         }
     };
 
@@ -31,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         filtroNps: 'nps',
         filtroCsat: 'csat',
         filtroMes: 'mes',
+        filtroFormulario : 'formName'
     };
 
     // Função que aplica todos os filtros registrados
@@ -54,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 }
             }
-            card.style.display = mostrar ? 'block' : 'none';
+            card.closest('.col-md-6').style.display = mostrar ? '' : 'none';
         });
     }
 

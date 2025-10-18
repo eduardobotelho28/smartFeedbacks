@@ -7,9 +7,9 @@ use App\Models\ReplyModel;
 
 class Feedbacks extends BaseController
 {
-    protected $formModel;
-    protected $replyModel;
-    protected $db;
+    protected $formModel   ;
+    protected $replyModel  ;
+    protected $db          ;
 
     public function __construct()
     {
@@ -23,8 +23,9 @@ class Feedbacks extends BaseController
         $user = session()->get('user');
 
         $builder = $this->db->table('replies');
-        $builder->select('replies.*, forms.name as form_name');
+        $builder->select('replies.*, reply_questions.*, forms.name as form_name, forms.hash  as form_hash');
         $builder->join('forms', 'forms.hash = replies.form');
+        $builder->join('reply_questions', 'reply_questions.reply = replies.hash');
         $builder->where('forms.user', $user);
         $builder->orderBy('replies.created_at', 'DESC');
 
