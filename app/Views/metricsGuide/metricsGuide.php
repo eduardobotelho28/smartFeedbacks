@@ -147,7 +147,7 @@
             Amplamente usado em plataformas digitais, ele traduz rapidamente o nível de satisfação em uma escala visual, ajudando a identificar a média da experiência geral.
         </div>
         <div class="metric-question">
-            “Como você classificaria nosso serviço de 1 a 5 estrelas?”
+            “Como você avaliaria nossa experiência geral?”
         </div>
     </div>
 

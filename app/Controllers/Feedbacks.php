@@ -31,77 +31,6 @@ class Feedbacks extends BaseController
 
         $feedbacks = $builder->get()->getResultArray();
 
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------- CALCULA E MONTA INFORMAÇÕES DE NPS ------------------------------ // 
-        // ---------------------------------------------------------------------------------------- //
-
-        $promotores = 0;
-        $neutros    = 0;
-        $detratores = 0;
-
-        $totalAvaliacoesNps = 0;
-
-        foreach ($feedbacks as $fb) {
-            if (!is_null($fb['nps'])) {
-                $nps = (int) $fb['nps'];
-                $totalAvaliacoesNps++;
-
-                if ($nps >= 9) {
-                    $promotores++;
-                } elseif ($nps >= 7) {
-                    $neutros++;
-                } else {
-                    $detratores++;
-                }
-            }
-        }
-
-        $percentPromotores = $totalAvaliacoesNps > 0 ? ($promotores / $totalAvaliacoesNps) * 100 : 0;
-        $percentDetratores = $totalAvaliacoesNps > 0 ? ($detratores / $totalAvaliacoesNps) * 100 : 0;
-        $npsScore = round($percentPromotores - $percentDetratores);
-
-        $data['nps'] = [
-            'qtd_promotores' => $promotores,
-            'qtd_neutros'    => $neutros,
-            'qtd_detratores' => $detratores,
-            'total'          => $totalAvaliacoesNps,
-            'nps'            => $npsScore
-        ];
-
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------------------------------------------------------------------------- //
-
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------- CALCULA E MONTA INFORMAÇÕES DE CSAT ----------------------------- // 
-        // ---------------------------------------------------------------------------------------- //
-
-        $satisfeitos = 0;
-        $totalCsat   = 0;
-
-        foreach ($feedbacks as $fb) {
-            if (!is_null($fb['csat'])) {
-                $csat = (int) $fb['csat'];
-                $totalCsat++;
-
-                if ($csat >= 4) {
-                    $satisfeitos++;
-                }
-            }
-        }
-
-        $csatPercent = $totalCsat > 0 ? round(($satisfeitos / $totalCsat) * 100) : 0;
-
-        $data['csat'] = [
-            'qtd_satisfeitos' => $satisfeitos,
-            'total'           => $totalCsat,
-            'csat'            => $csatPercent
-        ];
-
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------------------------------------------------------------------------- //
-        // ---------------------------------------------------------------------------------------- //
-
         $data['feedbacks'] = $feedbacks;
 
         return view('feedbacks/all', $data);
@@ -145,5 +74,7 @@ class Feedbacks extends BaseController
 
         return redirect()->to('/feedbacks')->with('success', 'Resposta excluída com sucesso!');
     }
+
+    
 
 }

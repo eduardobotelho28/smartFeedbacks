@@ -53,6 +53,10 @@
                         <a class="nav-link" href="<?= site_url('/feedbacks')?>">Meus Feedbacks</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= site_url('/summary')?>">Visão Geral</a>
+                    </li>
+
                     <!-- Dropdown de usuário -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white fw-bold px-3 py-1 rounded" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">
