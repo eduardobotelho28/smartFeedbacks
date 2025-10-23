@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="<?= base_url("assets/css/styles.css") ?>">
     <link rel="stylesheet" href="<?= base_url("assets/css/mediaQueries.css") ?>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="icon" href="<?= base_url('favicon.ico') ?>">
+
 </head>
 
 <!-- Toast container -->
