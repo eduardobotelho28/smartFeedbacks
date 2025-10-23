@@ -32,3 +32,6 @@ $routes->get('forms/thank-you', 'Forms::thankYou');
 $routes->get('metricsGuide', 'MetricsGuide::guideView');
 
 $routes->get('summary' , 'Summary::userSummary', ['filter' => 'auth']);
+
+$routes->get('templates/choose', 'Templates::choose', ['filter' => 'auth']);
+$routes->post('templates/create', 'Templates::create', ['filter' => 'auth']);

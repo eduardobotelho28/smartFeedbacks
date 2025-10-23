@@ -6,7 +6,10 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Meus Formulários</h2>
-        <a href="<?= site_url('forms/create') ?>" class="btn btn-success">Criar novo formulário</a>
+        <div>
+            <a href="<?= site_url('forms/create') ?>" class="btn btn-success">Criar novo formulário personalizado</a>
+            <a href="<?= site_url('templates/choose') ?>" class="btn" style="background-color:#007BFF; color:white">Criar novo formulário por template</a>
+        </div>
     </div>
 
     <?php if (!empty($forms)): ?>
