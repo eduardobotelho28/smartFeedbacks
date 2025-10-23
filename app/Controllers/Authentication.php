@@ -26,37 +26,72 @@ class Authentication extends BaseController
 
         $data = $this->request->getPost();
 
+        // $validationRules = [
+        //     'firstname'        => 'required|alpha_space'                             ,
+        //     'lastname'         => 'required|alpha_space'                             ,
+        //     'email'            => 'required|valid_email|is_unique[users.email]'      ,
+        //     'password'         => 'required|min_length[6]'                           ,
+        //     'password_confirm' => 'required|matches[password]'                       ,
+        // ];
+
         $validationRules = [
-            'firstname'        => 'required|alpha_space'                             ,
-            'lastname'         => 'required|alpha_space'                             ,
-            'email'            => 'required|valid_email|is_unique[users.email]'      ,
-            'password'         => 'required|min_length[6]'                           ,
-            'password_confirm' => 'required|matches[password]'                       ,
+            'firstname'        => 'required|regex_match[/^[A-Za-zÀ-ÿ\s]+$/u]',
+            'lastname'         => 'required|regex_match[/^[A-Za-zÀ-ÿ\s]+$/u]',
+            'email'            => 'required|valid_email|is_unique[users.email]',
+            'password'         => 'required|min_length[6]|regex_match[/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/]',
+            'password_confirm' => 'required|matches[password]',
         ];
+
     
+        // $validationMessages = [
+        //     'firstname' => [
+        //         'required' => 'O nome é obrigatório.',
+        //         'alpha_space' => 'O nome deve conter apenas letras e espaços.'
+        //     ],
+        //     'lastname' => [
+        //         'required' => 'O sobrenome é obrigatório.',
+        //         'alpha_space' => 'O sobrenome deve conter apenas letras e espaços.'
+        //     ],
+        //     'email' => [
+        //         'required' => 'O email é obrigatório.',
+        //         'valid_email' => 'O email informado não é válido.',
+        //         'is_unique'   => 'O email já está em uso',
+        //     ],
+        //     'password' => [
+        //         'required' => 'A senha é obrigatória.',
+        //         'min_length' => 'A senha deve ter no mínimo 6 caracteres.'
+        //     ],
+        //     'password_confirm' => [
+        //         'required' => 'A confirmação de senha é obrigatória.',
+        //         'matches' => 'A confirmação de senha deve ser igual à senha.'
+        //     ],
+        // ];
+
         $validationMessages = [
             'firstname' => [
                 'required' => 'O nome é obrigatório.',
-                'alpha_space' => 'O nome deve conter apenas letras e espaços.'
+                'regex_match' => 'O nome deve conter apenas letras e espaços'
             ],
             'lastname' => [
                 'required' => 'O sobrenome é obrigatório.',
-                'alpha_space' => 'O sobrenome deve conter apenas letras e espaços.'
+                'regex_match' => 'O sobrenome deve conter apenas letras e espaços'
             ],
             'email' => [
                 'required' => 'O email é obrigatório.',
                 'valid_email' => 'O email informado não é válido.',
-                'is_unique'   => 'O email já está em uso',
+                'is_unique' => 'O email já está em uso.',
             ],
             'password' => [
                 'required' => 'A senha é obrigatória.',
-                'min_length' => 'A senha deve ter no mínimo 6 caracteres.'
+                'min_length' => 'A senha deve ter no mínimo 6 caracteres.',
+                'regex_match' => 'A senha deve conter pelo menos uma letra, um número e um caractere especial.'
             ],
             'password_confirm' => [
                 'required' => 'A confirmação de senha é obrigatória.',
                 'matches' => 'A confirmação de senha deve ser igual à senha.'
             ],
         ];
+
 
         if (! $this->validate($validationRules, $validationMessages)) {
             return $this->response->setJSON([
