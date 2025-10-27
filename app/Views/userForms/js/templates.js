@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Seleciona todos os cards
     const templateCards = document.querySelectorAll('.template-card')
 
-    console.log(templateCards)
-
     // Cria o modal dinamicamente (Bootstrap 5)
     const modalHtml = `
     <div class="modal fade" id="templateModal" tabindex="-1" aria-labelledby="templateModalLabel" aria-hidden="true">

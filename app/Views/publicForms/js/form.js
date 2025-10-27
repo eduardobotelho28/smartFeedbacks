@@ -35,7 +35,6 @@ if (form) {
                 return;
             }
 
-            // Redireciona para página de agradecimento
             window.location.href = `${site_url}forms/thank-you`;
 
         } catch (error) {
