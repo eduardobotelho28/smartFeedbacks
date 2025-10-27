@@ -83,21 +83,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 modalBody += '</div>';
             } else if (metricKey === 'csat') {
-                const emojis = ['😠', '😕', '😐', '😊', '😍'];
-                modalBody = '<div class="d-flex justify-content-center gap-2 mt-2">';
+                const emojis = [
+                    { icon: '😠', title: 'Muito insatisfeito' },
+                    { icon: '😕', title: 'Insatisfeito' },
+                    { icon: '😐', title: 'Neutro' },
+                    { icon: '😊', title: 'Satisfeito' },
+                    { icon: '😍', title: 'Muito satisfeito' }
+                ];
+
+                modalBody = `
+                    <style>
+                    .emoji-option {
+                        position: relative;
+                        font-size: 1.8rem;
+                        padding: 0.5rem 0.7rem;
+                        border-radius: 50%;
+                        background-color: #eef6ff;
+                        color: #007BFF;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: transform 0.2s ease, background-color 0.2s ease;
+                        cursor: pointer;
+                    }
+                    .emoji-option:hover {
+                        transform: scale(1.2);
+                        background-color: #dceeff;
+                    }
+                    .emoji-option::after {
+                        content: attr(data-title);
+                        position: absolute;
+                        bottom: 130%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #007BFF;
+                        color: #fff;
+                        font-size: 0.75rem;
+                        padding: 0.3rem 0.5rem;
+                        border-radius: 5px;
+                        white-space: nowrap;
+                        opacity: 0;
+                        pointer-events: none;
+                        transition: opacity 0.2s;
+                    }
+                    .emoji-option:hover::after {
+                        opacity: 1;
+                    }
+                    </style>
+                    <div class="d-flex justify-content-center gap-3 mt-3">
+                `;
+
                 emojis.forEach(e => {
                     modalBody += `
-                        <div style="
-                            font-size: 1.5rem;
-                            padding: 0.4rem 0.6rem;
-                            border-radius: 50%;
-                            background-color: #eef6ff;
-                            color: #007BFF;
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                        ">${e}</div>`;
+                    <div class="emoji-option" data-title="${e.title}">
+                        ${e.icon}
+                    </div>
+                    `;
                 });
+
                 modalBody += '</div>';
             } else if (metricKey === 'stars') {
                 const stars = ['⭐','⭐','⭐','⭐','⭐'];

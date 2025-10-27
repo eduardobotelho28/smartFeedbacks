@@ -8,6 +8,7 @@
         min-height: 100vh;
         padding-top: 40px;
     }
+
     .form-container {
         background: #fff;
         border-radius: 12px;
@@ -17,6 +18,7 @@
         margin: 0 auto;
         margin-bottom: 2rem;
     }
+
     .form-title {
         color: #007BFF;
         font-weight: bold;
@@ -24,6 +26,7 @@
         font-size: 1.5rem;
         text-align: center;
     }
+
     .section-title {
         font-size: 1rem;
         font-weight: 500;
@@ -31,6 +34,7 @@
         margin-bottom: 0.4rem;
         margin-top: 2rem;
     }
+
     .rating-scale {
         display: flex;
         justify-content: center;
@@ -38,9 +42,11 @@
         flex-wrap: wrap;
         margin-bottom: 1.5rem;
     }
+
     .rating-scale input[type="radio"] {
         display: none;
     }
+
     .rating-scale label {
         cursor: pointer;
         padding: 0.5rem 0.7rem;
@@ -53,18 +59,21 @@
         min-width: 36px;
         text-align: center;
     }
-    .rating-scale input[type="radio"]:checked + label {
+
+    .rating-scale input[type="radio"]:checked+label {
         background-color: #007BFF;
         color: #fff;
         transform: scale(1.05);
     }
+
     .emoji-scale label {
         font-size: 1.4rem;
         padding: 0.4rem 0.6rem;
         border: none;
         background: none;
     }
-    .emoji-scale input[type="radio"]:checked + label {
+
+    .emoji-scale input[type="radio"]:checked+label {
         background-color: #007BFF;
         border-radius: 50%;
         color: white;
@@ -78,13 +87,16 @@
         margin-bottom: 1.5rem;
         align-items: center;
     }
+
     .star-scale div {
         margin: 0;
         padding: 0;
     }
+
     .star-scale input[type="radio"] {
         display: none !important;
     }
+
     .star-scale .star-label {
         font-size: 1.8rem;
         color: #d3d3d3;
@@ -100,11 +112,53 @@
         width: auto;
         text-align: left;
     }
+
     .star-scale .star-label:hover {
         color: #FFD700 !important;
     }
+
     .star-scale .star-label.active {
         color: #FFD700 !important;
+    }
+
+    .emoji-option {
+        position: relative;
+        cursor: pointer;
+        font-size: 1.8rem;
+        padding: 0.4rem 0.6rem;
+        border-radius: 50%;
+        background-color: #eef6ff;
+        color: #007BFF;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .emoji-option:hover {
+        transform: scale(1.2);
+        background-color: #dceeff;
+    }
+
+    .emoji-option::after {
+        content: attr(data-title);
+        position: absolute;
+        bottom: 130%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #007BFF;
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+    }
+
+    .emoji-option:hover::after {
+        opacity: 1;
     }
 </style>
 
@@ -112,7 +166,7 @@
     <div class="form-container">
         <h2 class="form-title"><?= esc($form['name']) ?></h2>
 
-        <form id="replyForm" data-hash="<?= $form['hash']?>">
+        <form id="replyForm" data-hash="<?= $form['hash'] ?>">
 
             <!-- Nome opcional -->
             <div class="mb-2">
@@ -138,12 +192,23 @@
                 <div class="section-title text-center">Como você avalia sua satisfação geral?</div>
                 <div class="rating-scale emoji-scale">
                     <?php
-                        $emojis = ['😠', '😕', '😐', '😊', '😍'];
-                        for ($i = 1; $i <= 5; $i++):
+                    $emojis = [
+                        ['icon' => '😠', 'title' => 'Muito insatisfeito'],
+                        ['icon' => '😕', 'title' => 'Insatisfeito'],
+                        ['icon' => '😐', 'title' => 'Neutro'],
+                        ['icon' => '😊', 'title' => 'Satisfeito'],
+                        ['icon' => '😍', 'title' => 'Muito satisfeito']
+                    ];
+                    for ($i = 1; $i <= 5; $i++):
                     ?>
                         <div>
                             <input type="radio" id="csat<?= $i ?>" name="csat" value="<?= $i ?>">
-                            <label for="csat<?= $i ?>"><?= $emojis[$i - 1] ?></label>
+                            <label
+                                for="csat<?= $i ?>"
+                                data-title="<?= $emojis[$i - 1]['title'] ?>"
+                                class="emoji-option">
+                                <?= $emojis[$i - 1]['icon'] ?>
+                            </label>
                         </div>
                     <?php endfor; ?>
                 </div>
