@@ -45,6 +45,8 @@ $routes->group('api', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->post('login', 'Api::login');
     $routes->get('user/info/(:num)', 'Api::userInfo/$1', ['filter' => 'jwt']);
     $routes->put('user/(:num)', 'Api::updateUser/$1', ['filter' => 'jwt']);
+    $routes->get('userFeedbacks/(:num)', 'Api::userFeedbacks/$1', ['filter' => 'jwt']);
+    $routes->get('feedbackInfo/(:segment)', 'Api::feedbackInfo/$1', ['filter' => 'jwt']);
 
 
 });

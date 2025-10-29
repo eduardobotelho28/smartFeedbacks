@@ -201,4 +201,81 @@ class Api extends BaseController
             'message' => 'Usuário atualizado com sucesso.'
         ]);
     }
+
+    public function userFeedbacks($id)
+    {
+        $decoded = $this->request->decodedToken ?? null;
+
+        if (!$decoded || !isset($decoded['uid']) || $decoded['uid'] != $id) {
+            return $this->response->setStatusCode(401)
+                ->setJSON(['error' => 'Token inválido para este usuário.']);
+        }
+
+        $page = (int)($this->request->getGet('page') ?? 1);
+        $limit = 10;
+        $offset = ($page - 1) * $limit;
+
+        $db = \Config\Database::connect();
+
+        $query = $db->table('replies')
+            ->select('forms.name AS form_name, replies.client_name, replies.created_at AS date, replies.hash AS reply_hash, forms.public_link AS form_url')
+            ->join('forms', 'forms.hash = replies.form')
+            ->where('forms.user', $id)
+            ->orderBy('replies.created_at', 'DESC');
+
+        $total = $query->countAllResults(false);
+
+        $feedbacks = $query->limit($limit, $offset)->get()->getResultArray();
+
+        return $this->response->setJSON([
+            'status' => 'ok',
+            'page' => $page,
+            'limit' => $limit,
+            'total' => $total,
+            'data' => $feedbacks
+        ]);
+    }
+
+    public function feedbackInfo($feedback_hash)
+    {
+        $decoded = $this->request->decodedToken ?? null;
+
+        if (!$decoded || !isset($decoded['uid'])) {
+            return $this->response->setStatusCode(401)
+                ->setJSON(['error' => 'Token inválido.']);
+        }
+
+        $uid = $decoded['uid'];
+
+        $db = \Config\Database::connect();
+
+        $query = $db->table('replies')
+            ->select('
+            reply_questions.nps,
+            reply_questions.csat,
+            reply_questions.cli,
+            reply_questions.ces,
+            reply_questions.simple_star,
+            reply_questions.exit_survey,
+            reply_questions.free_question_1,
+            reply_questions.free_question_2
+        ')
+            ->join('forms', 'forms.hash = replies.form')
+            ->join('reply_questions', 'reply_questions.reply = replies.hash')
+            ->where('replies.hash', $feedback_hash)
+            ->where('forms.user', $uid)
+            ->get();
+
+        $result = $query->getRowArray();
+
+        if (!$result) {
+            return $this->response->setStatusCode(404)
+                ->setJSON(['error' => 'Feedback não encontrado ou não pertence a este usuário.']);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'ok',
+            'data' => $result
+        ]);
+    }
 }
