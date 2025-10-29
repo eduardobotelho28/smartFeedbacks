@@ -18,7 +18,8 @@ $routes->get('forms/create', 'Forms::createFormView', ['filter' => 'auth']);
 $routes->post('forms/create', 'Forms::create', ['filter' => 'auth']);
 $routes->get('forms/delete/(:segment)', 'Forms::delete/$1', ['filter' => 'auth']);
 $routes->get('forms/reply/(:segment)',  'Forms::reply_view/$1');
-$routes->post('forms/reply/(:segment)', 'Forms::reply/$1');
+
+$routes->post('forms/reply/(:segment)', 'Forms::reply/$1', ['filter' => 'antispam']);
 
 $routes->get('feedbacks', 'Feedbacks::myFeedbacks', ['filter' => 'auth']);
 $routes->get('/feedbacks/view/(:hash)', 'Feedbacks::view/$1', ['filter' => 'auth']);
@@ -35,3 +36,13 @@ $routes->get('summary' , 'Summary::userSummary', ['filter' => 'auth']);
 
 $routes->get('templates/choose', 'Templates::choose', ['filter' => 'auth']);
 $routes->post('templates/create', 'Templates::create', ['filter' => 'auth']);
+
+
+//API ROUTES
+$routes->group('api', ['namespace' => 'App\Controllers'], function($routes) {
+
+    $routes->get('test', 'Api::test');
+    $routes->post('login', 'Api::login');
+    $routes->get('user/info/(:num)', 'Api::userInfo/$1', ['filter' => 'jwt']);
+
+});
