@@ -67,10 +67,138 @@ class Api extends BaseController
 
     public function userInfo($id)
     {
+        $decoded = $this->request->decodedToken ?? null;
+
+        if (!$decoded || !isset($decoded['uid']) || $decoded['uid'] != $id) {
+            return $this->response->setStatusCode(401)
+                ->setJSON(['error' => 'Token inválido para este usuário.']);
+        }
+
+        $db = \Config\Database::connect();
+
+        $feedbacks = $db->table('replies')
+            ->select('replies.*, reply_questions.*, forms.name as form_name, forms.hash as form_hash')
+            ->join('forms', 'forms.hash = replies.form')
+            ->join('reply_questions', 'reply_questions.reply = replies.hash')
+            ->where('forms.user', $id)
+            ->get()
+            ->getResultArray();
+
+        $nps = $this->calculateNPS($feedbacks);
+        $csat = $this->calculateCSAT($feedbacks);
+        $stars = $this->calculateStars($feedbacks);
+
+        $formsCount = $db->table('forms')->where('user', $id)->countAllResults();
+
         return $this->response->setJSON([
-            'message' => 'Token válido! Usuário autenticado.',
-            'user_id' => $id
+            'status' => 'ok',
+            'user_id' => $id,
+            'nps' => $nps['npsScore'],
+            'csat' => $csat['csatPercent'],
+            'stars' => $stars['media'],
+            'forms_count' => $formsCount
         ]);
     }
 
+    private function calculateNPS($feedbacks)
+    {
+        $promotores = $detratores = $total = 0;
+        foreach ($feedbacks as $fb) {
+            if (!is_null($fb['nps']) && (int)$fb['nps'] > 0) {
+                $nps = (int)$fb['nps'];
+                $total++;
+                if ($nps >= 9) $promotores++;
+                elseif ($nps <= 6) $detratores++;
+            }
+        }
+        $npsScore = $total > 0 ? round((($promotores - $detratores) / $total) * 100) : 0;
+        return compact('npsScore');
+    }
+
+    private function calculateCSAT($feedbacks)
+    {
+        $satisfeitos = $total = 0;
+        foreach ($feedbacks as $fb) {
+            if (!is_null($fb['csat']) && (int)$fb['csat'] > 0) {
+                $total++;
+                if ((int)$fb['csat'] >= 4) $satisfeitos++;
+            }
+        }
+        $csatPercent = $total > 0 ? round(($satisfeitos / $total) * 100) : 0;
+        return compact('csatPercent');
+    }
+
+    private function calculateStars($feedbacks)
+    {
+        $total = $soma = 0;
+        foreach ($feedbacks as $fb) {
+            if (!is_null($fb['simple_star']) && (int)$fb['simple_star'] > 0) {
+                $total++;
+                $soma += (int)$fb['simple_star'];
+            }
+        }
+        $media = $total > 0 ? round($soma / $total, 1) : 0;
+        return compact('media');
+    }
+
+    public function updateUser($id)
+    {
+        $decoded = $this->request->decodedToken ?? null;
+
+        if (!$decoded || !isset($decoded['uid']) || $decoded['uid'] != $id) {
+            return $this->response->setStatusCode(401)
+                ->setJSON(['error' => 'Token inválido para este usuário.']);
+        }
+
+        $data = $this->request->getJSON(true);
+
+        if (!$data) {
+            return $this->response->setStatusCode(400)
+                ->setJSON(['error' => 'Requisição inválida ou corpo vazio.']);
+        }
+
+        $validation = \Config\Services::validation();
+        $validationRules = [
+            'firstname' => 'required|alpha_space',
+            'lastname'  => 'required|alpha_space',
+            'email'     => 'required|valid_email|is_unique[users.email,id,' . $id . ']'
+        ];
+        $validationMessages = [
+            'firstname' => [
+                'required' => 'O nome é obrigatório.',
+                'alpha_space' => 'O nome deve conter apenas letras e espaços.'
+            ],
+            'lastname' => [
+                'required' => 'O sobrenome é obrigatório.',
+                'alpha_space' => 'O sobrenome deve conter apenas letras e espaços.'
+            ],
+            'email' => [
+                'required' => 'O email é obrigatório.',
+                'valid_email' => 'O email informado não é válido.',
+                'is_unique' => 'O email já está em uso por outro usuário.'
+            ]
+        ];
+
+        if (!$validation->setRules($validationRules, $validationMessages)->run($data)) {
+            return $this->response->setStatusCode(422)
+                ->setJSON(['errors' => $validation->getErrors()]);
+        }
+
+        $userModel = new UserModel();
+        $updated = $userModel->update($id, [
+            'firstname' => $data['firstname'],
+            'lastname'  => $data['lastname'],
+            'email'     => $data['email']
+        ]);
+
+        if (!$updated) {
+            return $this->response->setStatusCode(500)
+                ->setJSON(['error' => 'Falha ao atualizar o usuário.']);
+        }
+
+        return $this->response->setJSON([
+            'status' => 'ok',
+            'message' => 'Usuário atualizado com sucesso.'
+        ]);
+    }
 }
