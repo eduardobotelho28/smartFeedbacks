@@ -48,5 +48,4 @@ $routes->group('api', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('userFeedbacks/(:num)', 'Api::userFeedbacks/$1', ['filter' => 'jwt']);
     $routes->get('feedbackInfo/(:segment)', 'Api::feedbackInfo/$1', ['filter' => 'jwt']);
 
-
 });

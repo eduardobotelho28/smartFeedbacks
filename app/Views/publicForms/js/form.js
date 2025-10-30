@@ -6,7 +6,7 @@ if (form) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        
+     
         // const requiresNps = form.querySelector('[name="nps"]') !== null;
         // const requiresCsat = form.querySelector('[name="csat"]') !== null;
 
@@ -24,6 +24,15 @@ if (form) {
         // }
 
         const formData = new FormData(form);
+
+        const radioNames = new Set();
+        form.querySelectorAll('input[type="radio"]').forEach(r => radioNames.add(r.name));
+
+        radioNames.forEach(name => {
+            if (!formData.has(name)) {
+                formData.append(name, '');
+            }
+        });
 
         button.setAttribute('disabled', true)
 

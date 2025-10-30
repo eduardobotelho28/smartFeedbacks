@@ -33,6 +33,14 @@
         color: #343a40;
         margin-bottom: 0.4rem;
         margin-top: 2rem;
+        position: relative;
+    }
+
+    /* Indicativo de campo obrigatório */
+    .required::after {
+        content: " *";
+        color: #dc3545;
+        font-weight: bold;
     }
 
     .rating-scale {
@@ -60,7 +68,7 @@
         text-align: center;
     }
 
-    .rating-scale input[type="radio"]:checked+label {
+    .rating-scale input[type="radio"]:checked + label {
         background-color: #007BFF;
         color: #fff;
         transform: scale(1.05);
@@ -73,13 +81,12 @@
         background: none;
     }
 
-    .emoji-scale input[type="radio"]:checked+label {
+    .emoji-scale input[type="radio"]:checked + label {
         background-color: #007BFF;
         border-radius: 50%;
         color: white;
     }
 
-    /* SIMPLE STAR */
     .star-scale {
         display: flex;
         justify-content: center;
@@ -108,9 +115,7 @@
         background: none !important;
         line-height: 1;
         display: inline-block;
-        min-width: unset !important;
         width: auto;
-        text-align: left;
     }
 
     .star-scale .star-label:hover {
@@ -176,7 +181,7 @@
 
             <!-- NPS -->
             <?php if ($form['add_nps']): ?>
-                <div class="section-title text-center">Qual a chance de você recomendar este serviço/produto a um amigo?</div>
+                <div class="section-title text-center required">Qual a chance de você recomendar este serviço/produto a um amigo?</div>
                 <div class="rating-scale">
                     <?php for ($i = 1; $i <= 10; $i++): ?>
                         <div>
@@ -189,7 +194,7 @@
 
             <!-- CSAT -->
             <?php if ($form['add_csat']): ?>
-                <div class="section-title text-center">Como você avalia sua satisfação geral?</div>
+                <div class="section-title text-center required">Como você avalia sua satisfação geral?</div>
                 <div class="rating-scale emoji-scale">
                     <?php
                     $emojis = [
@@ -203,10 +208,7 @@
                     ?>
                         <div>
                             <input type="radio" id="csat<?= $i ?>" name="csat" value="<?= $i ?>">
-                            <label
-                                for="csat<?= $i ?>"
-                                data-title="<?= $emojis[$i - 1]['title'] ?>"
-                                class="emoji-option">
+                            <label for="csat<?= $i ?>" data-title="<?= $emojis[$i - 1]['title'] ?>" class="emoji-option">
                                 <?= $emojis[$i - 1]['icon'] ?>
                             </label>
                         </div>
@@ -216,7 +218,7 @@
 
             <!-- CES -->
             <?php if ($form['add_ces']): ?>
-                <div class="section-title text-center">De 1 a 7, o quão fácil foi comprar conosco?</div>
+                <div class="section-title text-center required">De 1 a 7, o quão fácil foi comprar conosco?</div>
                 <div class="rating-scale">
                     <?php for ($i = 1; $i <= 7; $i++): ?>
                         <div>
@@ -229,7 +231,7 @@
 
             <!-- CLI -->
             <?php if ($form['add_cli']): ?>
-                <div class="section-title text-center">De 1 a 10, qual a chance de você voltar a usar nossos serviços/produtos?</div>
+                <div class="section-title text-center required">De 1 a 10, qual a chance de você voltar a usar nossos serviços/produtos?</div>
                 <div class="rating-scale">
                     <?php for ($i = 1; $i <= 10; $i++): ?>
                         <div>
@@ -242,7 +244,7 @@
 
             <!-- SIMPLE STAR -->
             <?php if ($form['add_simple_star']): ?>
-                <div class="section-title text-center">Como você avaliaria nossa experiência geral?</div>
+                <div class="section-title text-center required">Como você avaliaria nossa experiência geral?</div>
                 <div class="star-scale">
                     <?php for ($i = 1; $i <= 5; $i++): ?>
                         <div>
@@ -255,9 +257,9 @@
 
             <!-- EXIT -->
             <?php if ($form['add_exit_survey']): ?>
-                <div class="section-title">Por favor, nos diga o principal motivo de sua saída ou insatisfação.</div>
+                <div class="section-title required">Por favor, nos diga o principal motivo de sua saída ou insatisfação.</div>
                 <div class="mb-3">
-                    <textarea name="exit_survey" class="form-control form-control-sm" rows="2"></textarea>
+                    <textarea name="exit_survey" class="form-control form-control-sm" rows="2" required></textarea>
                 </div>
             <?php endif; ?>
 
@@ -265,8 +267,8 @@
             <?php for ($i = 1; $i <= 2; $i++): ?>
                 <?php if (!empty($form['free_question_' . $i])): ?>
                     <div class="mb-3">
-                        <label class="form-label"><?= esc($form['free_question_' . $i]) ?></label>
-                        <textarea name="free_question_<?= $i ?>" class="form-control form-control-sm" rows="2"></textarea>
+                        <label class="form-label required"><?= esc($form['free_question_' . $i]) ?></label>
+                        <textarea name="free_question_<?= $i ?>" class="form-control form-control-sm" rows="2" required></textarea>
                     </div>
                 <?php endif; ?>
             <?php endfor; ?>
