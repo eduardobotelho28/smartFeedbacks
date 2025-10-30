@@ -183,7 +183,7 @@
       <div style="font-size: 1.1rem; color: #1E3A8A;">
         <p class="mb-2">
           <i class="bi bi-envelope-fill me-2" style="color:#007BFF;"></i>
-          <strong>Email:</strong> contato@smartfeedbacks.com.br
+          <strong>Email:</strong> dudubotelho2806@gmail.com
         </p>
 
       </div>
